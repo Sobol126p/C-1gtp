@@ -1,45 +1,27 @@
-#include <cstdlib>
+#include <fstream>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-int main(int argc, char *argv[])
+ifstream plik;
+ofstream zapis;
+int litry,jakosc;
+float cena;
+char napis[50];
+
+
+int main()
 {
-
-int wybor,i;
-float f;
-
-    printf("Menu: \n");
-
-    printf("1 - Zaokrąglij liczby \n");
-    
-    printf("2 - System szesnastkowy \n");
-    
-    printf("3 - Zera \n");
-    
-    printf("4 - Koniec \n");
-    
-    scanf("%d", &wybor);
-    
-    switch(wybor)
+    plik.open("C:\\Users\\Egzamin\\Desktop\\paliwo.txt");
+    zapis.open("C:\\Users\\Egzamin\\Desktop\\zapis_paliwo.txt");
+    if(plik.good())
+    while(!plik.eof())
     {
-        case 1:
-            printf("Podaj liczbę zmiennoprzecinkowa: \n");
-            scanf("%f", &f);
-            printf("Zaokrąglij cyfry: %.2f \n", f );
-        break;
-        case 2:
-            printf("Podaj liczbę: \n");
-            scanf("%i", &i);
-            printf("System szesnastkowy: %x \n", i );
-        break;
-        case 3:
-            printf("Podaj liczbę: \n");
-            scanf("%i", &i);
-            printf("Zera: %07d", i );
-        break;
-        case 4:
-            exit;
-        break;
+                     plik>>litry>>cena>>jakosc;
+                     snprintf(napis, 50, "Litry %d, Cena %.2f zl, Jakosc %x \n",litry,cena,jakosc);
+                     zapis<<napis;
     }
+    return 0;
 }
+
